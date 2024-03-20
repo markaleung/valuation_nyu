@@ -23,8 +23,8 @@ class DFColumns:
         = revenue diff / (sales / capital)
         '''
         self.df['reinvestment'] = self.df_input.revenue.diff() / self.df.sales_to_capital_ratio
-        years = self.config.years_all
-        self.df.loc[years, 'reinvestment'] = self.df_input.loc[years, 'growth'] * self.df.loc[years, 'ebit_after_tax'] / 0.18
+        self.end = self.df.loc[self.config.years_all]
+        self.df.loc[self.config.years_all, 'reinvestment'] = self.end.growth * self.end.ebit_after_tax / self.config.roic
     def _calculate_fcff(self):
         self.df['fcff'] = self.df.ebit_after_tax - self.df.reinvestment
         self.df['fcff_present'] = self.df.fcff * self.df_input.discount

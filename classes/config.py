@@ -37,6 +37,8 @@ class Config:
         self.risk_free = 0.0347
         self.cost_capital_end = 0.09
         self.sales_capital_end = self.sales_capital_start * 2/3
+        # Other
+        self.roic = 0.18
     def _final(self):
         # Fail
         self.book_equity = 41124
