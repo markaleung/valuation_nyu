@@ -3,17 +3,17 @@ import pandas as pd
 class DF:
     def __init__(self, config_):
         self.config = config_
-    def _calculate_ebit_start(self):
+    def _initialize_ebit(self):
         self.ebit_start = self.config.ebit_net
         if self.config.r_d_tf:
             self.ebit_start += self.config.r_d_adjustment
         if self.config.lease_tf:
             self.ebit_start += self.config.lease_adjustment
-    def _calculate_variables(self):
-        # Others
+    def _initialize_variables(self):
         self.revenue = self.config.revenue_start
         self.discount = 1
         self.df = []
+    def _initialize_convergers(self):
         # First Half
         self.margin = self.ebit_start / self.revenue
         self.margin_change = (self.margin - self.config.margin_target) / self.config.years
@@ -48,8 +48,9 @@ class DF:
         self.df = pd.DataFrame(self.df)
         self.df.loc[self.config.years_all, 'discount'] = float('nan')
     def main(self):
-        self._calculate_ebit_start()
-        self._calculate_variables()
+        self._initialize_ebit()
+        self._initialize_variables()
+        self._initialize_convergers()
         self._append_variables()
         for self.index in range(self.config.years_all):
             self._update_variables()

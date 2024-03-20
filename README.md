@@ -1,8 +1,7 @@
 # Introduction
-- This is my adaptation of Aswath Damodaran's November 2023 Tesla valuation
-- [Aswath Damodaran](https://pages.stern.nyu.edu/~adamodar/) is a finance professor at [Stern School of Business](https://www.stern.nyu.edu) at New York University
-- Article: [Tesla in November 2023: Story twists & turns, with value consequences!](https://aswathdamodaran.substack.com/p/tesla-in-november-2023-story-twists)
-- Excel: [My Tesla Valuation (October 30, 2023)](https://pages.stern.nyu.edu/~adamodar/pc/blog/Tesla2023OctDIY.xlsx)
+- This is my adaptation of [Aswath Damodaran's](https://pages.stern.nyu.edu/~adamodar/) [November 2023 Tesla valuation](https://aswathdamodaran.substack.com/p/tesla-in-november-2023-story-twists)
+- He is a finance professor at New York University's [Stern School of Business](https://www.stern.nyu.edu)
+- Here is the [Excel Spreadsheet](https://pages.stern.nyu.edu/~adamodar/pc/blog/Tesla2023OctDIY.xlsx) that the program is based on
 - I added a feature to optimize the model given the master input constraints, using [Optuna](https://optuna.org)
 
 # How to
@@ -69,11 +68,12 @@
     - r_d._calculate_amortized(): expense / # years
     - r_d._calculate_adjustment(): first expense - annual amortization
 - manager._run_df()
-    - df._calculate_ebit_start(): add r_d and lease to ebit_net
-    - df._calculate_variables(): margin, growth, tax, cost of capital converge
+    - df._initialize_ebit(): add r_d and lease to ebit_net
+    - df._initialize_variables(): revenue follows growth, discount follows cost of capital
+    - df._initialize_convergers(): margin, growth, tax, cost of capital converge
     - df._append_variables(): 
     - for df.index in range(df.config.years_all):
-        - df._update_variables(): revenue follows growth, discount follows cost of capital
+        - df._update_variables()
         - df._append_variables()
     - df._make_df()
 - manager._run_df_columns()
