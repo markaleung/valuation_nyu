@@ -2,3 +2,5 @@ jupyter
 optuna
 pandas
 plotly
+pytest
+scikit-learn
