@@ -21,6 +21,16 @@
 # Notes
 - I skipped the option derivation (final._calculate_share_price), because I didn't understand it
 
+## Simplified Logic
+- Revenue follows growth
+    - Ebit = revenue * margin
+    - Reinvestment = revenue diff * (capital / sales)
+    - FCFF = ebit - reinvestment
+- Discount follows cost of capital
+    - Annuity = terminal FCFF / (cost of capital - risk free)
+    - Present value = annuity + discounted FCFF
+    - Adjust present value for failure
+- Equity = present value - debt + cash
 ## What is the Difference Between Max and Min Valuation?
 - FCFF (Ebit - reinvestment) is lower
     - Ebit (revenue * margin) is lower
@@ -72,8 +82,8 @@
     - df_columns._calculate_reinvestment(): capital * revenue% change
     - df_columns._calculate_fcff(): ebit after tax - reinvestment
 - manager._run_final()
-    - final._calculate_value_end(): equity of terminal cash flow
-    - final._calculate_present(): add equity of discounted cash flows
+    - final._calculate_value_end(): terminal cash flow -> annuity
+    - final._calculate_present(): add discounted cash flows
     - final._calculate_fail(): adjust for chance of failure
     - final._calculate_equity(): adjust for debt, cash
     - final._calculate_share_price(): subtract options, divide by # shares

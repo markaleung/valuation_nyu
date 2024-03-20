@@ -6,7 +6,7 @@ class Final:
         self.config = config_
     def _calculate_value_end(self):
         self.end = self.df_input.loc[self.config.years_all]
-        self.value_end = self.end.fcff / (self.end.cost_of_capital - self.end.growth)
+        self.value_end = self.end.fcff / (self.end.cost_of_capital - self.config.risk_free)
     def _calculate_present(self):
         # Min = 2nd last value
         self.value_present = self.value_end * self.df_input.discount.min()
